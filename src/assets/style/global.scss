@@ -1,0 +1,186 @@
+$color-0 :#fff;
+$color-1 :#4c84ff;
+$color-2 :#485465;
+$color-3 :#78879c;
+$color-4 :#a8b4c4;
+$color-5 :#FFB6D4;
+$color-6 :#c3cdd9;
+$color-7 :#e7ebf1;
+$color-8 :#f7f8fd;
+$color-9 :#f4f9ff;
+$color-10 :#37c6b0;
+$color-11 :#ffb64d;
+$color-12 :#fa5555;
+$color-13 :#959FAE;
+$color-14:#F7F7FA;
+$color-15:#FFFBF6;
+$color-16:#D4DAE2;
+$color-17:#FDF7F0;
+$color-18:#B5C1D2;
+
+$color-list:(
+(0,$color-0),
+(1,$color-1),
+(2,$color-2),
+(3,$color-3),
+(4,$color-4),
+(5,$color-5),
+(6,$color-6),
+(7,$color-7),
+(8,$color-8),
+(9,$color-9),
+(10,$color-10),
+(11,$color-11),
+(12,$color-12),
+(13,$color-13),
+(14,$color-14),
+(15,$color-15),
+(16,$color-16),
+(17,$color-17),
+(18,$color-18),
+);
+
+
+//属性名 .bg-n .col-n 
+@each $label,$value in $color-list {
+    .col-#{$label} {
+        color: $value
+    };
+    .bg-#{$label} {
+        background:$value;
+    }
+}
+
+
+
+ // flex布局 默认居中
+@mixin flexLayout($center1: center, $center2: center) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: $center1; // flex-start | flex-end | center | space-between | space-around
+    align-items: $center2; // flex-start | flex-end | center | baseline | stretch
+}
+
+
+// position居中
+@mixin positionCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+// 文本超出隐藏 ...隐藏文本
+@mixin ellipsis($width: 100%) {
+    width: $width;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+// 文本最多(n)行，超出部分用...表示
+@mixin line($num) {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $num;
+    -webkit-box-orient: vertical;
+  }
+
+// 透明度 兼容IE8
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); // IE8
+}
+
+// 正三角形
+// $direction -> top | bottom | left | right
+@mixin triangle($width, $height, $color, $direction ) { 
+	$width: $width/2;
+    $border-style: $height solid $color;
+    $transparent-border: $width solid transparent;
+	height: 0; 
+	width: 0; 
+
+	@if $direction == top { 
+		border-bottom: $border-style; 
+		border-left: $transparent-border; 
+		border-right: $transparent-border; 
+	} @else if $direction == right { 
+		border-left: $border-style; 
+		border-top: $transparent-border; 
+		border-bottom: $transparent-border; 
+	} @else if $direction == bottom { 
+		border-top: $border-style; 
+		border-left: $transparent-border; 
+		border-right: $transparent-border; 
+	} @else if $direction == left { 
+		border-right: $border-style; 
+		border-top: $transparent-border; 
+		border-bottom: $transparent-border; 
+	} 
+}
+
+@for $num from 0 through 150 {
+    .w-#{$num} {
+        width: #{$num}px;
+    }
+
+    .min-w-#{$num} {
+        min-width: #{$num}px;
+    }
+
+    .max-w-#{$num} {
+        max-width: #{$num}px;
+    }
+
+    .h-#{$num} {
+        height: #{$num}px;
+    }
+
+    .min-h-#{$num} {
+        min-height: #{$num}px;
+    }
+
+    .max-h-#{$num} {
+        max-height: #{$num}px;
+    }
+}
+
+// 宽高
+@mixin wh($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+// 滚动条样式
+%scrollbar {
+    &::-webkit-scrollbar {
+        // 滚动条整体部分，其中有属性 width、height、background、border等（和块元素一样）
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        // 内层轨道，滚动条中间部分
+        background:$color-0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        // 滚动条里可以拖动的部分
+        background: $color-1;
+        border-radius: 4px;
+    }
+}
