@@ -1,5 +1,5 @@
 # medical
-
+医学信息网，一个大数据可视化，智能检索平台。前端
 ## Project setup
 ```
 npm install
